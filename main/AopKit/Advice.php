@@ -8,5 +8,5 @@ namespace AopKit;
  */
 interface Advice {
 
-	function invoke();
+	function invoke($args = array());
 }
