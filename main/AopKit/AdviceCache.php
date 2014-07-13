@@ -2,6 +2,10 @@
 
 namespace AopKit;
 
+/**
+ * A cache for advices.
+ * @author gbeine
+ */
 class AdviceCache {
 
 	private static $instance;
