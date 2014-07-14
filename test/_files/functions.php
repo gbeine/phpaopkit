@@ -36,6 +36,18 @@ function parameterListerTestWithClassFunction(BeforeAdvice $one, AroundAdvice $t
 	return true;
 }
 
+function weaverTestFunctionOne() {
+	return true;
+}
+
+function weaverTestFunctionTwo() {
+	return true;
+}
+
+function weaverTestFunctionThree() {
+	return true;
+}
+
 function unWeaverTestFunction() {
 	return true;
 }
