@@ -3,20 +3,20 @@
 namespace AopKit;
 
 /**
- * A weaver taking before advices onto functions and methods.
+ * A weaver taking around advices onto functions and methods.
  * @author gbeine
  */
-class BeforeWeaver extends AbstractWeaver {
+class AroundWeaver extends AbstractWeaver {
 
-	function addAdvice(BeforeAdvice $advice, $function) {
+	function addAdvice(AroundAdvice $advice, $function) {
 
 		$origFunction = AOPKIT_ORIGINAL_PREFIX.$function;
 		$adviceClass = get_class($advice);
 
 		$aspect = '$orig = new ReflectionFunction("'.$origFunction.'");'
 				. '$args = func_get_args();'
-				. 'AopKit\AdviceCache::instance()->lookUpAdvice("'.$adviceClass.'")->invoke($args);'
-				. 'return $orig->invokeArgs($args);';
+				. 'array_push($args, $orig);'
+				. 'return AopKit\AdviceCache::instance()->lookUpAdvice("'.$adviceClass.'")->invoke($args);';
 
 		parent::addAdvice($advice, $aspect, $function, $origFunction);
 	}

@@ -20,6 +20,14 @@ function afterWeaverTestWithParametersFunction($one, $two, $three) {
 	return true;
 }
 
+function aroundWeaverTestFunction() {
+	return true;
+}
+
+function aroundWeaverTestWithParametersFunction($one, $two, $three) {
+	return true;
+}
+
 function parameterListerTestFunction($one, $two, $three) {
 	return true;
 }
