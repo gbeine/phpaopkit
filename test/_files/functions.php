@@ -12,6 +12,14 @@ function beforeWeaverTestWithParametersFunction($one, $two, $three) {
 	return true;
 }
 
+function afterWeaverTestFunction() {
+	return true;
+}
+
+function afterWeaverTestWithParametersFunction($one, $two, $three) {
+	return true;
+}
+
 function parameterListerTestFunction($one, $two, $three) {
 	return true;
 }
