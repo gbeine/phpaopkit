@@ -25,7 +25,7 @@ class AroundWeaverTest extends \PHPUnit_Framework_TestCase {
 		$this->function = 'aroundWeaverTestFunction';
 
 		$weaver = new AroundWeaver();
-		$weaver->addAdvice($advice, $this->function);
+		$weaver->addAdviceOnFunction($advice, $this->function);
 
 		$result = aroundWeaverTestFunction();
 
@@ -39,7 +39,7 @@ class AroundWeaverTest extends \PHPUnit_Framework_TestCase {
 		$this->function = 'aroundWeaverTestWithParametersFunction';
 
 		$weaver = new AroundWeaver();
-		$weaver->addAdvice($advice, $this->function);
+		$weaver->addAdviceOnFunction($advice, $this->function);
 
 		$result = aroundWeaverTestWithParametersFunction("one", "two", "three");
 

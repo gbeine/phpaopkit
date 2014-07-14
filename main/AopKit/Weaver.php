@@ -8,7 +8,7 @@ namespace AopKit;
  */
 class Weaver {
 
-	function addAdvice(Advice $advice, $joinpoint, $function) {
+	function addAdviceOnFunction(Advice $advice, $joinpoint, $function) {
 		switch ($joinpoint) {
 			case AOPKIT_AFTER:
 				$weaver = new AfterWeaver();
@@ -22,7 +22,7 @@ class Weaver {
 			default:
 				throw new \Exception('No valid joinpoint given');
 		}
-		$weaver->addAdvice($advice, $function);
+		$weaver->addAdviceOnFunction($advice, $function);
 	}
 
 	function addAdviceOnFunctions(Advice $advice, $joinpoint, $pattern) {
@@ -31,13 +31,13 @@ class Weaver {
 
 		foreach ($functions['internal'] as $function) {
 			if (preg_match($pattern, $function)) {
-				$this->addAdvice($advice, $joinpoint, $function);
+				$this->addAdviceOnFunction($advice, $joinpoint, $function);
 			}
 		}
 
 		foreach ($functions['user'] as $function) {
 			if (preg_match($pattern, $function)) {
-				$this->addAdvice($advice, $joinpoint, $function);
+				$this->addAdviceOnFunction($advice, $joinpoint, $function);
 			}
 		}
 	}

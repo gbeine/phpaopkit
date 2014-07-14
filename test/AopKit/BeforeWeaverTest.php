@@ -25,7 +25,7 @@ class BeforeWeaverTest extends \PHPUnit_Framework_TestCase {
 		$this->function = 'beforeWeaverTestFunction';
 
 		$weaver = new BeforeWeaver();
-		$weaver->addAdvice($advice, $this->function);
+		$weaver->addAdviceOnFunction($advice, $this->function);
 
 		$result = beforeWeaverTestFunction();
 
@@ -39,7 +39,7 @@ class BeforeWeaverTest extends \PHPUnit_Framework_TestCase {
 		$this->function = 'beforeWeaverTestWithParametersFunction';
 
 		$weaver = new BeforeWeaver();
-		$weaver->addAdvice($advice, $this->function);
+		$weaver->addAdviceOnFunction($advice, $this->function);
 
 		$result = beforeWeaverTestWithParametersFunction("one", "two", "three");
 

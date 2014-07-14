@@ -27,7 +27,7 @@ class WeaverTest extends AbstractAopKitTestCase {
 
 		$advice = new WeaverTestAdvice();
 		$weaver = new Weaver();
-		$weaver->addAdvice($advice, AOPKIT_BEFORE, $function);
+		$weaver->addAdviceOnFunction($advice, AOPKIT_BEFORE, $function);
 
 		array_push($this->functions, $function);
 

@@ -8,7 +8,7 @@ namespace AopKit;
  */
 class AfterWeaver extends AbstractWeaver {
 
-	function addAdvice(AfterAdvice $advice, $function) {
+	function addAdviceOnFunction(AfterAdvice $advice, $function) {
 
 		$origFunction = AOPKIT_ORIGINAL_PREFIX.$function;
 		$adviceClass = get_class($advice);
@@ -20,6 +20,6 @@ class AfterWeaver extends AbstractWeaver {
 				. 'AopKit\AdviceCache::instance()->lookUpAdvice("'.$adviceClass.'")->invoke($args);'
 				. 'return $result;';
 
-		parent::addAdvice($advice, $aspect, $function, $origFunction);
+		parent::addAdviceOnFunction($advice, $aspect, $function, $origFunction);
 	}
 }

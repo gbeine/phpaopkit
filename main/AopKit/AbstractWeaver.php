@@ -8,7 +8,7 @@ namespace AopKit;
  */
 abstract class AbstractWeaver {
 
-	function addAdvice(Advice $advice, $aspect, $function, $origFunction) {
+	function addAdviceOnFunction(Advice $advice, $aspect, $function, $origFunction) {
 
 		$paLi = new ParameterLister($function);
 		$origParameters = $paLi->getParametersAsArgumentString();

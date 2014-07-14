@@ -25,7 +25,7 @@ class AfterWeaverTest extends \PHPUnit_Framework_TestCase {
 		$this->function = 'afterWeaverTestFunction';
 
 		$weaver = new AfterWeaver();
-		$weaver->addAdvice($advice, $this->function);
+		$weaver->addAdviceOnFunction($advice, $this->function);
 
 		$result = afterWeaverTestFunction();
 
@@ -40,7 +40,7 @@ class AfterWeaverTest extends \PHPUnit_Framework_TestCase {
 		$this->function = 'afterWeaverTestWithParametersFunction';
 
 		$weaver = new AfterWeaver();
-		$weaver->addAdvice($advice, $this->function);
+		$weaver->addAdviceOnFunction($advice, $this->function);
 
 		$result = afterWeaverTestWithParametersFunction("one", "two", "three");
 
