@@ -17,4 +17,18 @@ abstract class AbstractAopKitTestCase extends \PHPUnit_Framework_TestCase {
 		}
 		return self::assertFalse(function_exists($function), $message);
 	}
+
+	static function assertMethodExists($class, $method, $message = '') {
+		if ('' === $message) {
+			$message = "method $method does not exist in class $class";
+		}
+		return self::assertTrue(method_exists($class, $method), $message);
+	}
+
+	static function assertMethodNotExists($class, $method, $message = '') {
+		if ('' === $message) {
+			$message = "method $method does exist in class $class ";
+		}
+		return self::assertFalse(method_exists($class, $method), $message);
+	}
 }
