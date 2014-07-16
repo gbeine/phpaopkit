@@ -15,7 +15,7 @@ class AfterWeaverTest extends \PHPUnit_Framework_TestCase {
 	function tearDown() {
 		if (null !== $this->function) {
 			$unWeaver = new UnWeaver();
-			$unWeaver->removeAdvice($this->function);
+			$unWeaver->removeAdviceFromFunction($this->function);
 		}
 	}
 

@@ -16,7 +16,7 @@ class WeaverTest extends AbstractAopKitTestCase {
 		if (0 < array_count_values($this->functions)) {
 			$unWeaver = new UnWeaver();
 			foreach ($this->functions as $function) {
-				$unWeaver->removeAdvice($function);
+				$unWeaver->removeAdviceFromFunction($function);
 			}
 		}
 	}

@@ -2,6 +2,7 @@
 
 namespace AopKit;
 
+include_once __DIR__.'/../_files/classes.php';
 include_once __DIR__.'/../_files/functions.php';
 
 /**
@@ -21,7 +22,7 @@ class UnWeaverTest extends AbstractAopKitTestCase {
 		$this->assertFunctionExists($function);
 
 		$unWeaver = new UnWeaver();
-		$unWeaver->removeAdvice($function);
+		$unWeaver->removeAdviceFromFunction($function);
 
 		$this->assertFunctionNotExists($origFunction);
 		$this->assertFunctionExists($function);
@@ -35,9 +36,27 @@ class UnWeaverTest extends AbstractAopKitTestCase {
 		$this->assertFunctionExists($function);
 
 		$unWeaver = new UnWeaver();
-		$unWeaver->removeAdvice($function);
+		$unWeaver->removeAdviceFromFunction($function);
 
 		$this->assertFunctionNotExists($origFunction);
 		$this->assertFunctionExists($function);
+	}
+
+	function testUnWeavingOnMethod() {
+		$class = 'unWeaverTestClass';
+		$method = 'unWeaverTestMethod';
+		$origMethod = AOPKIT_ORIGINAL_PREFIX.$method;
+
+		runkit_method_rename($class, $method, $origMethod);
+		runkit_method_add($class, $method, '', '');
+
+		$this->assertMethodExists($class, $origMethod);
+		$this->assertMethodExists($class, $method);
+
+		$unWeaver = new UnWeaver();
+		$unWeaver->removeAdviceFromMethod($class, $method);
+
+		$this->assertMethodNotExists($class, $origMethod);
+		$this->assertMethodExists($class, $method);
 	}
 }
