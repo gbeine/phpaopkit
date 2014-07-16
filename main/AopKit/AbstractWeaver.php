@@ -10,7 +10,7 @@ abstract class AbstractWeaver {
 
 	function addAdviceOnFunction(Advice $advice, $aspect, $function, $origFunction) {
 
-		$paLi = new ParameterLister($function);
+		$paLi = new FunctionParameterLister($function);
 		$origParameters = $paLi->getParametersAsArgumentString();
 
 		runkit_function_rename($function, $origFunction);

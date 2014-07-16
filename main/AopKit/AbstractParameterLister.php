@@ -6,22 +6,11 @@ namespace AopKit;
  * A helper class for dealing with parameter lists.
  * @author gbeine
  */
-class ParameterLister {
+abstract class AbstractParameterLister {
 
-	private $function;
-	private $parameters;
+	protected $parameters;
 
-	function __construct($function) {
-		$this->function = $function;
-	}
-
-	function getParameters() {
-		if (null === $this->parameters) {
-			$function = new \ReflectionFunction($this->function);
-			$this->parameters = $function->getParameters();
-		}
-		return $this->parameters;
-	}
+	abstract function getParameters();
 
 	function getParametersAsArgumentString() {
 		$parameters = $this->getParameters();
