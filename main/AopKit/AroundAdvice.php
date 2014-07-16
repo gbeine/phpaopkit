@@ -10,5 +10,5 @@ namespace AopKit;
  */
 interface AroundAdvice extends Advice {
 
-	function invokeAround($args, \Reflector $orig);
+	function invokeAround($args, \ReflectionFunctionAbstract $orig);
 }

@@ -8,7 +8,7 @@ namespace AopKit;
  */
 class AroundTestAdvice extends AbstractAroundAdvice {
 
-	function invokeAround($args, \Reflector $orig) {
+	function invokeAround($args, \ReflectionFunctionAbstract $orig) {
 		echo "AroundTestAdvice invoked";
 		if (0 < count($args)) {
 			echo ": ".join(", ", $args);

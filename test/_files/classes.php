@@ -11,3 +11,12 @@ class ParameterListerTestClass {
 		return true;
 	}
 }
+
+class WeaverTestClass {
+	function testOne() {
+		return true;
+	}
+	function testTwo() {
+		return true;
+	}
+}

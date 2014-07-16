@@ -20,4 +20,16 @@ class BeforeWeaver extends AbstractWeaver {
 
 		parent::addAdviceOnFunction($advice, $aspect, $function, $origFunction);
 	}
+
+	function addAdviceOnMethod(BeforeAdvice $advice, $class, $method) {
+		$origMethod = AOPKIT_ORIGINAL_PREFIX.$method;
+		$adviceClass = get_class($advice);
+
+		$aspect = '$orig = new ReflectionMethod("'.$class.'","'.$origMethod.'");'
+				. '$args = func_get_args();'
+				. 'AopKit\AdviceCache::instance()->lookUpAdvice("'.$adviceClass.'")->invoke($args);'
+				. 'return $orig->invokeArgs($this, $args);';
+
+		parent::addAdviceOnMethod($advice, $aspect, $class, $method, $origMethod);
+	}
 }

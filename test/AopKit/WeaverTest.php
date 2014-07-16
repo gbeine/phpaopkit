@@ -2,6 +2,7 @@
 
 namespace AopKit;
 
+include_once __DIR__.'/../_files/classes.php';
 include_once __DIR__.'/../_files/functions.php';
 
 /**
@@ -51,5 +52,18 @@ class WeaverTest extends AbstractAopKitTestCase {
 			$this->assertFunctionExists($function);
 			$this->assertFunctionExists($origFunction);
 		}
+	}
+
+	function testWeavingOnClass() {
+		$class = 'WeaverTestClass';
+
+		$advice = new WeaverTestAdvice();
+		$weaver = new Weaver();
+		$weaver->addAdviceOnClass($advice, AOPKIT_BEFORE, $class);
+
+		$this->assertMethodExists($class, 'testone');
+		$this->assertMethodExists($class, AOPKIT_ORIGINAL_PREFIX.'testone');
+		$this->assertMethodExists($class, 'testtwo');
+		$this->assertMethodExists($class, AOPKIT_ORIGINAL_PREFIX.'testtwo');
 	}
 }

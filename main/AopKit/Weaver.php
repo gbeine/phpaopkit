@@ -8,20 +8,16 @@ namespace AopKit;
  */
 class Weaver {
 
+	private $weavers = array();
+
+	function __construct() {
+		$this->weavers[AOPKIT_AFTER] = new AfterWeaver();
+		$this->weavers[AOPKIT_AROUND] = new AroundWeaver();
+		$this->weavers[AOPKIT_BEFORE] = new BeforeWeaver();
+	}
+
 	function addAdviceOnFunction(Advice $advice, $joinpoint, $function) {
-		switch ($joinpoint) {
-			case AOPKIT_AFTER:
-				$weaver = new AfterWeaver();
-				break;
-			case AOPKIT_AROUND:
-				$weaver = new AroundWeaver();
-				break;
-			case AOPKIT_BEFORE:
-				$weaver = new BeforeWeaver();
-				break;
-			default:
-				throw new \Exception('No valid joinpoint given');
-		}
+		$weaver = $this->getWeaver($joinpoint);
 		$weaver->addAdviceOnFunction($advice, $function);
 	}
 
@@ -40,5 +36,24 @@ class Weaver {
 				$this->addAdviceOnFunction($advice, $joinpoint, $function);
 			}
 		}
+	}
+
+	function addAdviceOnClass(Advice $advice, $joinpoint, $class) {
+		$methods = get_class_methods($class);
+		foreach ($methods as $method) {
+			$this->addAdviceOnMethod($advice, $joinpoint, $class, $method);
+		}
+	}
+
+	function addAdviceOnMethod(Advice $advice, $joinpoint, $class, $method) {
+		$weaver = $this->getWeaver($joinpoint);
+		$weaver->addAdviceOnMethod($advice, $class, $method);
+	}
+
+	private function getWeaver($joinpoint) {
+		if (!array_key_exists($joinpoint, $this->weavers)) {
+			throw new \Exception('No valid joinpoint given');
+		}
+		return $this->weavers[$joinpoint];
 	}
 }

@@ -18,4 +18,15 @@ abstract class AbstractWeaver {
 
 		AdviceCache::instance()->addAdvice($advice);
 	}
+
+	function addAdviceOnMethod(Advice $advice, $aspect, $class, $method, $origMethod) {
+
+		$paLi = new MethodParameterLister($class, $method);
+		$origParameters = $paLi->getParametersAsArgumentString();
+
+		runkit_method_rename($class, $method, $origMethod);
+		runkit_method_add($class, $method, $origParameters, $aspect);
+
+		AdviceCache::instance()->addAdvice($advice);
+	}
 }
